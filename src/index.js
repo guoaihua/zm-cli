@@ -7,13 +7,30 @@
 
  const { program } = require('commander');
  const { resolve } = require("path");
+ const Asker = require('./core/ask');
  
- program
-   .command('init <projectName>')
-   .description('init a project')
-   .action((source,destination)=>{
-       console.log(source,destination);
-       require('./create')(source);
-   })
 
- program.parse(program.argv)  
+class  Gee {
+   constructor(){
+  
+   }
+   init(){
+    // 注入命令
+
+    // init 创建项目
+    program
+      .command('init [projectName]')
+      .description('create a  new project')
+      .action( async(name, options, command)=>{
+          // 开始交互式询问，获取项目信息
+          var userOpts = await new Asker(name, options);
+          console.log(userOpts)
+      })
+
+    //commander 解析命令行参数
+    program.parse(process.argv)  
+   }
+   
+ }
+
+ module.exports = Gee;

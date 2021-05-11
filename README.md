@@ -45,3 +45,22 @@ https://www.jianshu.com/p/aaa7db89a5b2
 Commander 定义一些命令行参数：https://github.com/tj/commander.js
 Download-git-repo 下载模板   https://gitlab.com/flippidippi/download-git-repo#readme
 chalk 美化命令行提示
+
+
+5. 功能
+    1.利用 gee init 创建项目
+    2.询问一些项目相关的问题
+
+        项目描述相关的 名字、描述...
+        选择开发语言 ts、js
+        打包工具 webpack、rollup
+        选择模板 vue、react、小程序
+        组件库 geeui、elementui
+    3. 自定义一些命令
+        init、create、build    
+    4.开发编译
+        下拉模板仓库
+        合并项目配置
+
+    5.运行    
+

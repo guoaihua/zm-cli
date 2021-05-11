@@ -4,7 +4,7 @@
  * @LastEditors: ziming
  * @LastEditTime: 2021-02-08 18:21:11
  */
-const { isExist } = require('./utility');
+const { isExist } = require('../share/utility');
 const  download = require('download-git-repo');
 const chalk = require("chalk");
 

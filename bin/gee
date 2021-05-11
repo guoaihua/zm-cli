@@ -1,2 +1,4 @@
 #! /usr/bin/env node
-require('../src/index');
+const Gee = require('../src/index.js');
+const gee = new Gee();
+gee.init();
