@@ -16,6 +16,7 @@
     "chalk": "^4.1.0",
     "commander": "^7.0.0",
     "download-git-repo": "^3.0.2",
-    "inquirer": "^8.0.0"
+    "inquirer": "^8.0.0",
+    "vue-cli": "^2.9.6"
   }
 }
