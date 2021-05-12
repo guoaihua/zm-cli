@@ -14,6 +14,12 @@ class Asker {
             },
             {
                 type: 'input',
+                name: 'author',
+                message: '请输入作者',
+                default: 'ziming'
+            },
+            {
+                type: 'input',
                 name: 'description',
                 message: '项目描述',
                 default: 'no description'

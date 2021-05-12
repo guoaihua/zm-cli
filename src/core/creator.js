@@ -5,11 +5,14 @@
  * @LastEditTime: 2021-02-08 18:21:11
  */
 const { isExist } = require('../share/utility');
-const { getRemoteRepo} = require('./repo');
+const { getRemoteRepo } = require('./repo');
+const path = require('path');
 
- async function create(opts){
+const complieTpl = require('./complietpl');
+
+async function create(opts) {
     // 先检查文件夹是否存在
-    if(isExist(opts.distance)){
+    if (isExist(opts.distance)) {
         return;
     }
 
@@ -18,12 +21,20 @@ const { getRemoteRepo} = require('./repo');
         1.自定义模板库拉取
         2.借助其他的cli生成
     */
-    getRemoteRepo(opts.distance);
-
-
+    await getRemoteRepo(opts.distance);
+    // 模板下面的package.json
+    var templatePath = path.join(opts.distance, './package.json');
+    //var templatePath = path.resolve(__dirname, './package.json');
+    // 自定义数据
+    var data = {
+        projectName: opts.projectName,
+        description: opts.description,
+        author: opts.author
+    }
 
     // 模板下载成功之后开始进行编译
-    // complieTemplate();
- }
+    await complieTpl(templatePath, data);
+    console.log("template complie ok!");
+}
 
- module.exports = create
+module.exports = create
