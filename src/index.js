@@ -10,7 +10,8 @@
  const Asker = require('./core/ask');
  const creator = require('./core/creator');
  const path = require('path');
- const { getWorkDir } = require('./share/utility');
+ const { getWorkDir, log } = require('./share/utility');
+ const installPackages = require('./core/installPackages');
 
 class  Gee {
    constructor(){
@@ -25,15 +26,19 @@ class  Gee {
       .description('create a  new project')
       .action( async(name, options, command)=>{
           // 开始交互式询问，获取项目信息
+          // 1.合并配置
           const asker = new Asker(name);
           let userOpts = await asker.init();
-          //合并配置
           this.opts = Object.assign({},this.defaultOpts, userOpts);
-
-          // 项目目录
           this.opts.distance = path.resolve(process.cwd(), this.opts.projectName);
-    
-          creator(this.opts);
+          // 2.创建构造器，拉取模板并且完成编译
+          await creator(this.opts);
+
+          // 3.自动安装依赖
+          const npm = process.platform === 'win32' ? 'npm.cmd' : 'cnpm'; //兼容window
+          await installPackages(npm, ['install'], {
+            cwd: `./${this.opts.projectName}`
+          });
       })
 
     //commander 解析命令行参数
@@ -41,5 +46,6 @@ class  Gee {
    }
    
  }
+
 
  module.exports = Gee;

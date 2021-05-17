@@ -58,9 +58,13 @@ chalk 美化命令行提示
         组件库 geeui、elementui
     3. 自定义一些命令
         init、create、build    
+    
     4.开发编译
         下拉模板仓库
         合并项目配置
 
     5.运行    
 
+    6.依赖安装
+
+    7.融合其他cli命令
