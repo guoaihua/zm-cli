@@ -24,10 +24,17 @@ class  Gee {
     program
       .command('init [projectName]')
       .description('create a  new project')
+      .option('-cli, --cli [type]', 'Add cheese with optional type')
       .action( async(name, options, command)=>{
+        console.log(name, options);
+        if(options.cli){
+          var cli = options.cli;
+          await installPackages('vue.cmd', [`create ${name}`]);
+        }
+     return;   
           // 开始交互式询问，获取项目信息
           // 1.合并配置
-          const asker = new Asker(name);
+          const asker = new Asker();
           let userOpts = await asker.init();
           this.opts = Object.assign({},this.defaultOpts, userOpts);
           this.opts.distance = path.resolve(process.cwd(), this.opts.projectName);

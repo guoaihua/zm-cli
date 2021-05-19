@@ -3,6 +3,7 @@ const { log } = require('../share/utility');
 
 function installPackages(command,args, options){
     log(`开始执行命令：${command}`);
+    log(args)
     return new Promise((resolve)=>{
         const child = spawn(command, args, options);
         child.stdout.on('data',data=>console.log(data.toString()));
