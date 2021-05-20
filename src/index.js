@@ -26,14 +26,33 @@ class  Gee {
       .description('create a  new project')
       .option('-cli, --cli [type]', 'Add cheese with optional type')
       .action( async(name, options, command)=>{
-        console.log(name, options);
-        let temp = path.resolve(__dirname, '../node_modules/.bin/vue');
-        console.log(temp);
         if(options.cli){
-          var cli = options.cli;
-          await installPackages( 'node' , [temp,'create',name]);
+          switch(options.cli){
+            case 'vue': 
+              await installPackages( 'node' , [path.resolve(__dirname, '../node_modules/.bin/vue'), 'create', name],
+                {stdio: [process.stdin, process.stdout, process.stderr]}
+              );
+              break;
+            case 'vite':
+              await installPackages( 'node' , [path.resolve(__dirname, '../node_modules/.bin/create-vite-app'), name]);
+              break;
+          }
+        }else {
+          // 使用默认cli 开始交互式询问，获取项目信息
+          // 1.合并配置
+          const asker = new Asker();
+          let userOpts = await asker.init();
+          this.opts = Object.assign({},this.defaultOpts, userOpts);
+          this.opts.distance = path.resolve(process.cwd(), this.opts.projectName);
+          // 2.创建构造器，拉取模板并且完成编译
+          await creator(this.opts);
+
+          // 3.自动安装依赖
+          const npm = process.platform === 'win32' ? 'npm.cmd' : 'cnpm'; //兼容window
+          await installPackages(npm, ['install'], {
+            cwd: `./${this.opts.projectName}`
+          });
         }
-     return;   
       })
 
     //commander 解析命令行参数
