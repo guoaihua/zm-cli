@@ -6,8 +6,6 @@ function installPackages(command,args, options){
     log(args)
     return new Promise((resolve)=>{
         const child = spawn(command, args, options);
-        child.stdout.on('data',data=>console.log(data.toString()));
-        child.stderr.on('data', data=>console.log(data.toString()));
         child.on('close', code=>{
             log('执行完毕');
             resolve()

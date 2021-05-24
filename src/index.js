@@ -24,7 +24,7 @@ class  Gee {
     program
       .command('init [projectName]')
       .description('create a  new project')
-      .option('-cli, --cli [type]', 'Add cheese with optional type')
+      .option('-cli, --cli <type>', 'choose a official cli like vue、vite、react')
       .action( async(name, options, command)=>{
         if(options.cli){
           switch(options.cli){
@@ -34,7 +34,14 @@ class  Gee {
               );
               break;
             case 'vite':
-              await installPackages( 'node' , [path.resolve(__dirname, '../node_modules/.bin/create-vite-app'), name]);
+              await installPackages( 'node' , [path.resolve(__dirname, '../node_modules/.bin/create-vite-app'), name],
+              {stdio: [process.stdin, process.stdout, process.stderr]}
+              );
+              break;
+            case 'react':
+              await installPackages( 'node' , [path.resolve(__dirname, '../node_modules/.bin/create-react-app'), name],
+              {stdio: [process.stdin, process.stdout, process.stderr]}
+              );
               break;
           }
         }else {
