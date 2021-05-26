@@ -5,11 +5,9 @@ const chalk = require("chalk");
 const { github } = require('../config/repo');
 
 
-
 module.exports = {
     getRemoteRepo: (distance) => {
         //拉取远程仓库模板
-
         return new Promise((res, rej)=>{
             download(github.default, distance,{ clone: true}, function (err) {
                 if (err) {

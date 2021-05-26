@@ -2,8 +2,7 @@ const { spawn } = require('child_process');
 const { log } = require('../share/utility');
 
 function installPackages(command,args, options){
-    log(`开始执行命令：${command}`);
-    log(args)
+    log(`开始执行命令：${command} ${args}`);
     return new Promise((resolve)=>{
         const child = spawn(command, args, options);
         child.on('close', code=>{

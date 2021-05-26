@@ -1,9 +1,3 @@
-/*
- * @Author: ziming
- * @Date: 2021-02-08 17:38:50
- * @LastEditors: ziming
- * @LastEditTime: 2021-02-08 18:21:11
- */
 const { isExist } = require('../share/utility');
 const { getRemoteRepo } = require('./repo');
 const path = require('path');
@@ -29,7 +23,6 @@ async function create(opts) {
     await getRemoteRepo(opts.distance);
     // 模板下面的package.json
     var templatePath = path.join(opts.distance, './package.json');
-    //var templatePath = path.resolve(__dirname, './package.json');
     // 自定义数据
     var data = {
         projectName: opts.projectName,
