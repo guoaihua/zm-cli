@@ -4,13 +4,13 @@
  * @LastEditors: ziming
  * @LastEditTime: 2021-02-08 18:33:01
 -->
-# gee-cli
+#zm-cli
 this is a custom cli for daliy work
 
 1.在package.json文件中创建bin字段，该字段指定了指令对应的可执行文件
 ```javascript
 {
-"name": "gee-cli",
+"name": "zm-cli",
 
 "version": "1.0.0",
 
@@ -23,7 +23,7 @@ this is a custom cli for daliy work
 
 },
 "bin": {
-"gee": "bin/gee” // 指定gee指令对应的可执行文件位置
+"zm-cli": "bin/zmcli” // 指定zm指令对应的可执行文件位置
 
 },
 "keywords": [],
@@ -48,14 +48,14 @@ chalk 美化命令行提示
 
 
 5. 功能
-    1.利用 gee init 创建项目
+    1.利用 zm init 创建项目
     2.询问一些项目相关的问题
 
         项目描述相关的 名字、描述...
         选择开发语言 ts、js
         打包工具 webpack、rollup
         选择模板 vue、react、小程序
-        组件库 geeui、elementui
+        组件库 elementui
     3. 自定义一些命令
         init、create、build    
     
